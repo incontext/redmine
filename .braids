@@ -1,0 +1,8 @@
+--- 
+vendor/plugins/redmine_subtasks: 
+  squashed: true
+  url: git://github.com/hron/redmine_subtasks.git
+  branch: master
+  type: git
+  revision: bfcac353da8f3135947a1bdc93f4c4566720dccf
+  remote: braid/vendor/plugins/redmine-subtasks
