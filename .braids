@@ -13,3 +13,10 @@ vendor/plugins/captcha:
   type: git
   revision: f39c738fce9111b311e5fef43847a01921af086e
   remote: braid/vendor/plugins/captcha
+vendor/plugins/redmine_nicta: 
+  squashed: true
+  url: git@github.com:incontext/redmine_nicta.git
+  branch: master
+  type: git
+  revision: f92d9ece64c24b54283ada4d41f6c36eb1b5a7f0
+  remote: braid/vendor/plugins/redmine-nicta
