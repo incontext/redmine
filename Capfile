@@ -15,7 +15,7 @@ set :use_sudo, false
 ssh_options[:forward_agent] = true
 
 set :scm, :git
-set :repository, "git://github.com/edavis10/redmine.git"
+set :repository, "git://github.com/incontext/redmine.git"
 set :deploy_via, :remote_cache
 
 set :application, project_name
