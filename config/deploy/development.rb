@@ -1,6 +1,6 @@
-role :app, "www.mytestbed.net"
-role :web, "www.mytestbed.net"
-role :db,  "www.mytestbed.net", :primary => true
+role :app, "pdev.mytestbed.net"
+role :web, "pdev.mytestbed.net"
+role :db,  "pdev.mytestbed.net", :primary => true
 
 set :rails_env, "development"
 set :user, "redmine-dev"
