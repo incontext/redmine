@@ -1,13 +1,12 @@
+development:
+  adapter: postgresql
+  database: redmine_development
+  encoding: utf8
+ 
 production:
   adapter: postgresql
   database: redmine_production
   username: redmine-prod
-  encoding: utf8
- 
-development:
-  adapter: postgresql
-  database: redmine_development
-  username: redmine-dev
   encoding: utf8
 
 test:
