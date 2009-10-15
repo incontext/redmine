@@ -1,7 +1,7 @@
-role :app, "production"
-role :web, "production"
-role :db,  "production", :primary => true
+role :app, "www.mytestbed.net"
+role :web, "www.mytestbed.net"
+role :db,  "www.mytestbed.net", :primary => true
 
 set :rails_env, "production"
-set :mongrel_environment, rails_env
-set :gateway, "arakwal.incontext.com.au"
+set :user, "redmine-prod"
+set :deploy_to, "/var/lib/rails/prod/#{project_name}"

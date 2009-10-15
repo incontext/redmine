@@ -1,8 +1,7 @@
-role :app, "asparagine"
-role :web, "asparagine"
-role :db,  "asparagine", :primary => true
+role :app, "www.mytestbed.net"
+role :web, "www.mytestbed.net"
+role :db,  "www.mytestbed.net", :primary => true
 
 set :rails_env, "development"
-set :mongrel_environment, rails_env
-set :mongrel_address, "0.0.0.0"
-set :mongrel_clean, true
+set :user, "redmine-dev"
+set :deploy_to, "/var/lib/rails/dev/#{project_name}"
