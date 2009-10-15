@@ -38,6 +38,11 @@ Rails::Initializer.run do |config|
   # config.active_record.observers = :cacher, :garbage_collector
   config.active_record.observers = :message_observer, :issue_observer, :journal_observer, :news_observer, :document_observer, :wiki_content_observer
 
+  config.action_controller.session = {
+    :session_key => '_pn_session',
+    :secret      => 'beca8245224a05380dcbf987fc3609071f99da27a390d97c89d9fa747e292bb66cce601e3ecf1524fe872f00475e5b33b8f7bf4b3b47989a161680a5fae26885'
+  }
+
   # Make Active Record use UTC-base instead of local time
   # config.active_record.default_timezone = :utc
   
