@@ -25,8 +25,11 @@ class IssuesController < ApplicationController
   include ActionView::Helpers::PrototypeHelper
 
   def add_subissue
+    issue_params = { :parent_id => @parent_issue.id }
+    issue_params[:tracker_id] = @tracker.id if @tracker
+
     redirect_to :action => 'new',
-                :issue => { :parent_id => @parent_issue.id, :tracker_id => @tracker.id }
+                :issue => issue_params
   end
 
   def auto_complete_for_issue_parent
@@ -71,7 +74,7 @@ class IssuesController < ApplicationController
 
   def find_parent_issue
     @parent_issue = Issue.find( params[:parent_issue_id])
-    @tracker = Tracker.find( params[:tracker_id])
+    @tracker = Tracker.find( params[:tracker_id]) if params[:tracker_id]
   rescue ActiveRecord::RecordNotFound
     render_404
   end
