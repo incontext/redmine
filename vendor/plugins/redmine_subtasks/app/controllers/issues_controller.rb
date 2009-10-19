@@ -3,7 +3,7 @@ require_dependency 'issues_controller'
 class IssuesController < ApplicationController
 
   unloadable
-  
+
   prepend_before_filter :redmine_ext
 
   skip_before_filter :authorize, :only => [ :add_subissue,
@@ -23,10 +23,10 @@ class IssuesController < ApplicationController
                                          :update_form,
                                          :context_menu]
   include ActionView::Helpers::PrototypeHelper
-  
+
   def add_subissue
     redirect_to :action => 'new',
-                :issue => { :parent_id => @parent_issue.id }
+                :issue => { :parent_id => @parent_issue.id, :tracker_id => @tracker.id }
   end
 
   def auto_complete_for_issue_parent
@@ -59,7 +59,7 @@ class IssuesController < ApplicationController
       tokens = @phrase.scan(%r{((\s|^)"[\s\w]+"(\s|$)|\S+)}).collect {|m| m.first.gsub(%r{(^\s*"\s*|\s*"\s*$)}, '')}
       # tokens must be at least 3 character long
       tokens = tokens.uniq.select {|w| w.length > 2 }
-      like_tokens = tokens.collect {|w| "%#{w.downcase}%"}      
+      like_tokens = tokens.collect {|w| "%#{w.downcase}%"}
 
       @candidates, count = Issue.search( like_tokens, projects_to_search, :before => true)
     end
@@ -71,6 +71,7 @@ class IssuesController < ApplicationController
 
   def find_parent_issue
     @parent_issue = Issue.find( params[:parent_issue_id])
+    @tracker = Tracker.find( params[:tracker_id])
   rescue ActiveRecord::RecordNotFound
     render_404
   end
@@ -130,10 +131,10 @@ class IssuesController < ApplicationController
       format.html { render :template => 'issues/show.rhtml',
                            :layout => !request.xhr? }
       format.atom { render :action => 'changes',
-                           :layout => false, 
+                           :layout => false,
                            :content_type => 'application/atom+xml' }
-      format.pdf  { send_data(issue_to_pdf(@issue), 
-                              :type => 'application/pdf', 
+      format.pdf  { send_data(issue_to_pdf(@issue),
+                              :type => 'application/pdf',
                               :filename => "#{@project.identifier}-#{@issue.id}.pdf") }
     end
   end
