@@ -5,20 +5,20 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 class AccountController < ApplicationController
   helper :custom_fields
-  include CustomFieldsHelper   
-  
+  include CustomFieldsHelper
+
   # prevents login action to be filtered by check_if_login_required application scope filter
   skip_before_filter :check_if_login_required
 
@@ -36,7 +36,7 @@ class AccountController < ApplicationController
     logout_user
     redirect_to home_url
   end
-  
+
   # Enable user to choose a new password
   def lost_password
     redirect_to(home_url) && return unless Setting.lost_password?
@@ -51,7 +51,7 @@ class AccountController < ApplicationController
           flash[:notice] = l(:notice_account_password_updated)
           redirect_to :action => 'login'
           return
-        end 
+        end
       end
       render :template => "account/password_recovery"
       return
@@ -73,7 +73,7 @@ class AccountController < ApplicationController
       end
     end
   end
-  
+
   # User self-registration
   def register
     redirect_to(home_url) && return unless Setting.self_registration? || session[:auth_source_registration]
@@ -95,6 +95,8 @@ class AccountController < ApplicationController
           redirect_to :controller => 'my', :action => 'account'
         end
       else
+        @user.known_captcha = session[:captcha]
+        @user.captcha = params[:captcha]
         @user.login = params[:user][:login]
         @user.password, @user.password_confirmation = params[:password], params[:password_confirmation]
 
@@ -109,7 +111,7 @@ class AccountController < ApplicationController
       end
     end
   end
-  
+
   # Token based account activation
   def activate
     redirect_to(home_url) && return unless Setting.self_registration? && params[:token]
@@ -124,7 +126,7 @@ class AccountController < ApplicationController
     end
     redirect_to :action => 'login'
   end
-  
+
   private
   
   def logout_user
@@ -156,7 +158,7 @@ class AccountController < ApplicationController
     end
   end
 
-  
+
   def open_id_authenticate(openid_url)
     authenticate_with_open_id(openid_url, :required => [:nickname, :fullname, :email], :return_to => signin_url) do |result, identity_url, registration|
       if result.successful?
@@ -185,7 +187,7 @@ class AccountController < ApplicationController
             register_manually_by_administrator(user) do
               onthefly_creation_failed(user)
             end
-          end          
+          end
         else
           # Existing record
           if user.active?
@@ -197,7 +199,7 @@ class AccountController < ApplicationController
       end
     end
   end
-  
+
   def successful_authentication(user)
     # Valid user
     self.logged_user = user
@@ -235,7 +237,7 @@ class AccountController < ApplicationController
       yield if block_given?
     end
   end
-  
+
   # Automatically register a user
   #
   # Pass a block for behavior when a user fails to save
@@ -251,7 +253,7 @@ class AccountController < ApplicationController
       yield if block_given?
     end
   end
-  
+
   # Manual activation by the administrator
   #
   # Pass a block for behavior when a user fails to save

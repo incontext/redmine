@@ -5,12 +5,12 @@
 # modify it under the terms of the GNU General Public License
 # as published by the Free Software Foundation; either version 2
 # of the License, or (at your option) any later version.
-# 
+#
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
@@ -19,6 +19,7 @@ require 'uri'
 require 'cgi'
 
 class ApplicationController < ActionController::Base
+  acts_as_captcha
   include Redmine::I18n
 
   layout 'base'
@@ -56,7 +57,7 @@ class ApplicationController < ActionController::Base
     # Find the current user
     User.current = find_current_user
   end
-  
+
   # Returns the current user or nil if no user is logged in
   # and starts a session if needed
   def find_current_user
@@ -94,14 +95,14 @@ class ApplicationController < ActionController::Base
       User.current = User.anonymous
     end
   end
-  
+
   # check if login is globally required to access the application
   def check_if_login_required
     # no check needed if user is already logged in
     return true if User.current.logged?
     require_login if Setting.login_required?
-  end 
-  
+  end
+
   def set_localization
     lang = nil
     if User.current.logged?
@@ -117,7 +118,7 @@ class ApplicationController < ActionController::Base
     lang ||= Setting.default_language
     set_language_if_valid(lang)
   end
-  
+
   def require_login
     if !User.current.logged?
       # Extract only the basic url parameters on non-GET requests
@@ -146,7 +147,7 @@ class ApplicationController < ActionController::Base
     end
     true
   end
-  
+
   def deny_access
     User.current.logged? ? render_403 : require_login
   end
@@ -264,7 +265,7 @@ class ApplicationController < ActionController::Base
     end
     redirect_to default
   end
-  
+
   def render_403
     @project = nil
     respond_to do |format|
@@ -276,7 +277,7 @@ class ApplicationController < ActionController::Base
     end
     return false
   end
-    
+
   def render_404
     respond_to do |format|
       format.html { render :template => "common/404", :layout => use_layout, :status => 404 }
@@ -287,7 +288,7 @@ class ApplicationController < ActionController::Base
     end
     return false
   end
-  
+
   def render_error(msg)
     respond_to do |format|
       format.html { 
@@ -314,20 +315,20 @@ class ApplicationController < ActionController::Base
     end
     render_error "Invalid form authenticity token."
   end
-  
-  def render_feed(items, options={})    
+
+  def render_feed(items, options={})
     @items = items || []
     @items.sort! {|x,y| y.event_datetime <=> x.event_datetime }
     @items = @items.slice(0, Setting.feeds_limit.to_i)
     @title = options[:title] || Setting.app_title
     render :template => "common/feed.atom.rxml", :layout => false, :content_type => 'application/atom+xml'
   end
-  
+
   def self.accept_key_auth(*actions)
     actions = actions.flatten.map(&:to_s)
     write_inheritable_attribute('accept_key_auth_actions', actions)
   end
-  
+
   def accept_key_auth_actions
     self.class.read_inheritable_attribute('accept_key_auth_actions') || []
   end
@@ -367,7 +368,7 @@ class ApplicationController < ActionController::Base
   rescue
     nil
   end
-  
+
   # Returns a string that can be used as filename value in Content-Disposition header
   def filename_for_content_disposition(name)
     request.env['HTTP_USER_AGENT'] =~ %r{MSIE} ? ERB::Util.url_encode(name) : name
