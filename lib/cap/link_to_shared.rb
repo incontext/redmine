@@ -17,6 +17,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   task :thin_config, :roles => :web do
     run <<-CMD
       rm -f #{latest_release}/config/thin.yml &&
+      mkdir -p #{shared_path}/config &&
       ln -s #{shared_path}/config/thin.yml #{latest_release}/config/thin.yml
     CMD
   end
@@ -29,6 +30,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   task :session_store, :roles => :web do
     run <<-CMD
       rm -f #{latest_release}/config/initializers/session_store.rb &&
+      mkdir -p #{shared_path}/config/initializers &&
       ln -s #{shared_path}/config/initializers/session_store.rb #{latest_release}/config/initializers/session_store.rb
     CMD
   end
