@@ -25,3 +25,6 @@ before "deploy:update", 'check_branch_name'
 
 # Configure mongrel
 # after "deploy:update", 'mongrel:cluster:configure'
+
+after "deploy:update", 'thin_config'
+after "deploy:update", 'session_store'
