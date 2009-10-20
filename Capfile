@@ -28,3 +28,4 @@ before "deploy:update", 'check_branch_name'
 
 after "deploy:update", 'thin_config'
 after "deploy:update", 'session_store'
+after "deploy:update", 'captcha'
