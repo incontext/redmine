@@ -1,0 +1,22 @@
+# Outgoing email settings
+
+development:
+  delivery_method: :smtp
+  smtp_settings:
+    address: localhost
+    port: 25
+    domain: mytestbed.net
+
+test:
+  delivery_method: :smtp
+  smtp_settings:
+    address: localhost
+    port: 25
+    domain: mytestbed.net
+
+production:
+  delivery_method: :smtp
+  smtp_settings:
+    address: localhost
+    port: 25
+    domain: mytestbed.net
