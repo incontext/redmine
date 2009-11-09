@@ -1,0 +1,8 @@
+development:
+  git_dir: /var/cache/git/development/
+
+test:
+  git_dir: /var/cache/git/test/
+
+production:
+  git_dir: /var/cache/git/production/
