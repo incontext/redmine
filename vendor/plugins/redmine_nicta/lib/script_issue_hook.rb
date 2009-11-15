@@ -16,20 +16,27 @@ class ScriptIssueHook  < Redmine::Hook::ViewListener
         data << "<td>#{script_path}</td>"
       end
       data << "
-        <td><b>Indentifier :</b></td>
+        <td><b>Identifier :</b></td>
         <td>#{identifier}</td>"
       return "<tr>#{data}<td></td></tr>"
     when 'Script run'
       script_version = html_escape(context[:issue].script_version)
-      if context[:issue].parent and context[:issue].parent.identifier and context[:issue].parent.script_path and script_version != ''
+      if context[:parent_issue] and context[:parent_issue].identifier and context[:parent_issue].script_path and script_version != ''
         data = "<tr><td><b>Script version :</b></td>"
-        data << "<td><a href= '/projects/#{context[:project].identifier}/scripts/#{script_version}/#{context[:issue].parent.identifier}/#{context[:issue].parent.script_path}'>#{script_version}</a></td></tr>"
+        begin
+          g = Git.open(AppConfig['git_dir'] + context[:project].identifier)
+          script_path = "#{context[:parent_issue].identifier}/#{context[:parent_issue].script_path}"
+          commits = g.gblob(script_path).log
+          data << "<td><a href= '/projects/#{context[:project].identifier}/scripts/#{script_version}/#{script_path}'>#{script_path} -- v #{commits.size - commits.to_a.index {|v| v.sha == script_version}}</a></td></tr>"
+        rescue => e
+          data << "<td>#{script_version} (#{e.message})</td>"
+        end
       else
         data = "<tr><td><b>Script version :</b></td><td>#{script_version}</td></tr>"
       end
 
       attribute_text = html_escape(context[:issue].attribute_text)
-      attribute_text_display = "<div style='height: 100px; overflow: auto;'><table width=100%>"
+      attribute_text_display = "<div style='height: 100px; overflow: auto;'><table width=50%>"
       display_content = attribute_text.split(',').inject '' do |str, v|
         v_pair = v.split(':')
         str << "<tr><td>#{v_pair[0]}</td><td>#{v_pair[1]}</td></tr>"
@@ -53,36 +60,31 @@ class ScriptIssueHook  < Redmine::Hook::ViewListener
   #
   def view_issues_form_details_bottom(context = { })
     case context[:issue].tracker.name
-    when 'Script'
-      script_path_text_field = context[:form].text_field :script_path
-      identifier_text_field = ''
-      begin
-        g = Git.open(AppConfig['git_dir'] + context[:project].identifier)
-        g.chdir do
-          if context[:issue].identifier and File.exist?(context[:issue].identifier)
-            identifier_text_field = context[:form].text_field :identifier, :disabled => 'disabled'
-          else
-            identifier_text_field = context[:form].text_field :identifier
-          end
-        end
-      rescue
-        identifier_text_field = context[:form].text_field :identifier
-      end
-      return "<p>#{script_path_text_field}</p><p>#{identifier_text_field}</p>"
     when 'Script run'
       status_done = context[:issue].status.name == 'Done'
       script_version_field = ''
       begin
         g =  Git.open(AppConfig['git_dir'] + context[:project].identifier)
-        parent_issue = context[:issue].parent
+        parent_issue = context[:parent_issue]
         commits = g.gblob("#{parent_issue.identifier}/#{parent_issue.script_path}").log
-        script_version_field = context[:form].select(:script_version, commits.collect {|v| [v.message, v.sha]}, {:disabled => status_done ? 'restricted' : ''})
+        script_version_field = context[:form].select :script_version, commits.each_with_index.collect {|v, index| ["#{commits.size - index} #{v.message}", v.sha]}
       rescue
-        script_version_field = context[:form].select(:script_version, [[]], {:disabled => status_done ? 'restricted' : ''})
+        script_version_field = context[:form].select :script_version, [[]]
       end
-      attribute_text_field = context[:form].text_area :attribute_text, :rows => 3, :style => 'width: 90%', :disabled => status_done ? 'disabled' : ''
-      log_data_field = context[:form].text_area :log_data, :rows => 3, :style => 'width: 90%', :disabled => status_done ? 'disabled' : ''
-      return "<p>#{script_version_field}</p><p>#{attribute_text_field}</p><p>#{log_data_field}</p>"
+      attribute_text_field = context[:form].text_area :attribute_text, :rows => 3, :style => 'width: 90%'
+      log_data_field = context[:form].text_area :log_data, :rows => 3, :style => 'width: 90%'
+
+      hide_fields_script =
+        "<script type='text/javascript'>
+            var form_fields = $('issue-form').getElements();
+            for (x in form_fields) {
+              var field = form_fields[x];
+              if (field.id != 'issue_status_id' && field.id != 'issue_subject' && field.id != 'issue_description') {
+                field.disable();
+              }
+            }
+        </script>" if status_done
+      return "<p>#{script_version_field}</p><p>#{attribute_text_field}</p><p>#{log_data_field}</p>#{hide_fields_script}"
     else
       return ''
     end
