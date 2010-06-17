@@ -1,8 +1,8 @@
 --- 
 vendor/plugins/captcha: 
   squashed: true
-  branch: master
   url: git://github.com/winton/captcha.git
+  branch: master
   type: git
   revision: f39c738fce9111b311e5fef43847a01921af086e
   remote: braid/vendor/plugins/captcha
@@ -11,5 +11,5 @@ vendor/plugins/redmine_nicta:
   branch: master
   url: git@github.com:incontext/redmine_nicta.git
   type: git
-  revision: 80c219b0b9beeef1bb9bb538e9724f772f184f37
+  revision: 70f399d2bb4e0dbd810df73dba8095b23f8feefc
   remote: braid/vendor/plugins/redmine-nicta
