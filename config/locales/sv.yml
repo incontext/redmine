@@ -332,6 +332,7 @@ sv:
   field_default_value: Standardvärde
   field_comments_sorting: Visa kommentarer
   field_parent_title: Föräldersida
+  field_is_private: Private issue
   field_editable: Redigerbar
   field_watcher: Bevakare  
   field_identity_url: OpenID URL
@@ -403,6 +404,8 @@ sv:
   permission_manage_versions: Hantera versioner
   permission_manage_categories: Hantera ärendekategorier
   permission_add_issues: Lägga till ärenden
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: Ändra ärenden
   permission_view_issues: Visa ärenden
   permission_manage_issue_relations: Hantera ärenderelationer
@@ -579,6 +582,8 @@ sv:
   label_public_projects: Publika projekt
   label_open_issues: öppen
   label_open_issues_plural: öppna
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: stängd
   label_closed_issues_plural: stängda
   label_x_open_issues_abbr_on_total:

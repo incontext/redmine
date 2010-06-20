@@ -7,7 +7,7 @@
                                      :with => "Form.serialize('issue-form')" %>
 
 <p><%= f.text_field :subject, :size => 80, :required => true %></p>
-                                     
+
 <% unless (@issue.new_record? && @issue.parent_issue_id.nil?) || !User.current.allowed_to?(:manage_subtasks, @project) %>
 <p><%= f.text_field :parent_issue_id, :size => 10 %></p>
 <div id="parent_issue_candidates" class="autocomplete"></div>
@@ -24,6 +24,9 @@
 <div id="attributes" class="attributes">
 	<%= render :partial => 'issues/attributes' %>
 </div>
+<% if User.current.allowed_to?(:add_issues, @project) && User.current.allowed_to?(:add_private_issues, @project) %>
+<p><%=f.check_box :is_private %></p>
+<% end %>
 
 <% if @issue.new_record? %>
 <p><%= label_tag('attachments[1][file]', l(:label_attachment_plural))%><%= render :partial => 'attachments/form' %></p>

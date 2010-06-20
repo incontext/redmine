@@ -420,6 +420,8 @@ da:
   label_public_projects: Offentlige projekter
   label_open_issues: åben
   label_open_issues_plural: åbne
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: lukket
   label_closed_issues_plural: lukkede
   label_x_open_issues_abbr_on_total:
@@ -735,6 +737,8 @@ da:
   button_quote: Citér
   permission_view_files: Se filer
   permission_add_issues: Tilføj sager
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_own_messages: Redigér egne beskeder
   permission_delete_own_messages: Slet egne beskeder
   permission_manage_public_queries: Administrér offentlig forespørgsler
@@ -750,6 +754,7 @@ da:
   setting_sequential_project_identifiers: Generér sekventielle projekt-identifikatorer
   setting_plain_text_mail: Emails som almindelig tekst (ingen HTML)
   field_parent_title: Siden over
+  field_is_private: Private issue
   text_email_delivery_not_configured: "Email-afsendelse er ikke indstillet og notifikationer er defor slået fra.\nKonfigurér din SMTP server i config/email.yml og genstart applikationen for at aktivere email-afsendelse."
   permission_protect_wiki_pages: Beskyt wiki sider
   permission_manage_documents: Administrér dokumenter

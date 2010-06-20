@@ -541,6 +541,8 @@ he:
   label_public_projects: פרויקטים פומביים
   label_open_issues: פתוח
   label_open_issues_plural: פתוחים
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: סגור
   label_closed_issues_plural: סגורים
   label_x_open_issues_abbr_on_total:

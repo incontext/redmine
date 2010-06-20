@@ -69,13 +69,14 @@ module Redmine
       # sorted in reverse chronological order
       def events(from = nil, to = nil, options={})
         e = []
-        @options[:limit] = options[:limit]
+#        @options[:limit] = options[:limit]
         
         @scope.each do |event_type|
           constantized_providers(event_type).each do |provider|
             e += provider.find_events(event_type, @user, from, to, @options)
           end
         end
+        e.delete_if { |a| a.is_a?(Issue) && !a.visible? || a.is_a?(Journal) && !a.issue.visible? }
         
         e.sort! {|a,b| b.event_datetime <=> a.event_datetime}
         

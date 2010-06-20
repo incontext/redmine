@@ -407,6 +407,8 @@ sk:
   label_public_projects: Verejné projekty
   label_open_issues: Otvorený
   label_open_issues_plural: Otvorené
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: Uzavrený
   label_closed_issues_plural: Uzavrené
   label_x_open_issues_abbr_on_total:
@@ -722,6 +724,7 @@ sk:
   setting_mail_handler_api_key: API kľúč
   text_email_delivery_not_configured: "Doručenie emailov nieje nastavené, notifikácie sú vypnuté.\nNastavte váš SMTP server v config/email.yml a reštartnite aplikáciu pre aktiváciu funkcie."
   field_parent_title: Nadradená stránka
+  field_is_private: Private issue
   label_issue_watchers: Pozorovatelia
   setting_commit_logs_encoding: Kódovanie prenášaných správ
   button_quote: Citácia
@@ -735,6 +738,8 @@ sk:
   permission_edit_own_time_entries: Úprava vlastných zaznamov o strávenom čase
   permission_manage_public_queries: Správa verejných otáziek
   permission_add_issues: Pridanie úlohy
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Zaznamenávanie stráveného času
   permission_view_changesets: Zobrazenie sád zmien
   permission_view_time_entries: Zobrazenie stráveného času

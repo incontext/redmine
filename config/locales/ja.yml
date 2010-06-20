@@ -312,6 +312,7 @@ ja:
   field_default_value: デフォルト値
   field_comments_sorting: コメントを表示
   field_parent_title: 親ページ
+  field_is_private: Private issue
   field_editable: 編集可能
   field_watcher: ウォッチャー
   field_identity_url: OpenID URL
@@ -387,6 +388,8 @@ ja:
   permission_manage_categories: チケットのカテゴリの管理
   permission_view_issues: チケットの閲覧
   permission_add_issues: チケットの追加
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: チケットの編集
   permission_manage_issue_relations: チケットの管理
   permission_add_issue_notes: 注記の追加
@@ -564,6 +567,8 @@ ja:
   label_public_projects: 公開プロジェクト
   label_open_issues: 未完了
   label_open_issues_plural: 未完了
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: 完了
   label_closed_issues_plural: 完了
   label_x_open_issues_abbr_on_total:

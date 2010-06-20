@@ -277,6 +277,7 @@ class IssuesControllerTest < ActionController::TestCase
   
   def test_show_should_deny_member_access_without_permission
     Role.find(1).remove_permission!(:view_issues)
+    Role.find(1).remove_permission!(:view_private_issues)
     @request.session[:user_id] = 2
     get :show, :id => 1
     assert_response 403
@@ -313,6 +314,55 @@ class IssuesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:issue)
   end
 
+  def test_show_private_issue_by_manager
+    @request.session[:user_id] = 2
+    get :show, :id => 14
+    assert_response :success
+    assert_tag :td, :attributes => { :class => 'private-issue'}
+  end
+
+  def test_show_private_issue_by_admin
+    @request.session[:user_id] = 1
+    get :show, :id => 14
+    assert_response :success
+    assert_tag :td, :attributes => { :class => 'private-issue'}
+  end
+  
+  def test_show_private_issue_by_developer
+    @request.session[:user_id] = 3
+    get :show, :id => 14
+    assert_response :success
+    # Developer can view private issues
+    assert_tag :td, :attributes => { :class => 'private-issue'}
+  end
+
+  def test_show_private_issue_by_issue_author
+    # issue author always can browse his issue
+    @request.session[:user_id] = 12
+    get :show, :id => 14
+    assert_response :success
+    assert_tag :input, :attributes => { :name => 'issue[is_private]'}
+    assert_tag :td, :attributes => { :class => 'private-issue'}
+  end
+
+  def test_show_private_issue_by_other_member
+    # Reporter2 not can browse his issue
+    @request.session[:user_id] = 13
+    get :show, :id => 14
+    assert_response 403
+  end
+
+  def test_show_private_issue_by_non_member
+    @request.session[:user_id] = 4
+    get :show, :id => 14
+    assert_response 403
+  end
+
+  def test_show_private_issue_by_anonymous
+    get :show, :id => 14
+    assert_response 403
+  end
+  
   def test_get_new
     @request.session[:user_id] = 2
     get :new, :project_id => 1, :tracker_id => 1
@@ -321,6 +371,49 @@ class IssuesControllerTest < ActionController::TestCase
     
     assert_tag :tag => 'input', :attributes => { :name => 'issue[custom_field_values][2]',
                                                  :value => 'Default string' }
+  end
+
+  def test_get_new_manager
+    # Manager have add_private_issue permission
+    @request.session[:user_id] = 2
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    assert_tag :input, :attributes => { :name => 'issue[is_private]'}
+  end
+
+  def test_get_new_developer
+    @request.session[:user_id] = 3
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    # Developer can't change issue type
+    assert_no_tag :input, :attributes => { :name => 'issue[is_private]'}
+  end
+
+  def test_get_new_reporter
+    @request.session[:user_id] = 12
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    # Reporter can add private issue
+    assert_tag :input, :attributes => { :name => 'issue[is_private]'}
+  end
+
+  def test_get_new_admin
+    @request.session[:user_id] = 1
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    assert_tag :input, :attributes => { :name => 'issue[is_private]'}
+  end
+
+  def test_get_new_reporter2
+    @request.session[:user_id] = 13
+    get :new, :project_id => 1, :tracker_id => 1
+    assert_response :success
+    assert_template 'new'
+    assert_no_tag :input, :attributes => { :name => 'issue[is_private]'}
   end
 
   def test_get_new_without_tracker_id

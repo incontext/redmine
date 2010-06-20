@@ -376,6 +376,8 @@ it:
   label_public_projects: Progetti pubblici
   label_open_issues: aperta
   label_open_issues_plural: aperte
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: chiusa
   label_closed_issues_plural: chiuse
   label_x_open_issues_abbr_on_total:
@@ -745,6 +747,8 @@ it:
   permission_edit_own_time_entries: Modifica propri time logs
   permission_manage_public_queries: Gestisci query pubbliche
   permission_add_issues: Aggiungi segnalazioni
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Segna tempo impiegato
   permission_view_changesets: Vedi changesets
   permission_view_time_entries: Vedi tempi impiegati

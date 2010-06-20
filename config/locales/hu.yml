@@ -438,6 +438,8 @@
   label_public_projects: Nyilvános projektek
   label_open_issues: nyitott
   label_open_issues_plural: nyitott
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: lezárt
   label_closed_issues_plural: lezárt
   label_x_open_issues_abbr_on_total:
@@ -764,6 +766,8 @@
   permission_edit_own_time_entries: Saját időnapló szerkesztése
   permission_manage_public_queries: Nyilvános kérések kezelése
   permission_add_issues: Feladat felvétele
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Idő rögzítése
   permission_view_changesets: Változáskötegek megtekintése
   permission_view_time_entries: Időrögzítések megtekintése

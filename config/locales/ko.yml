@@ -323,6 +323,7 @@ ko:
   field_searchable: 검색가능
   field_comments_sorting: 댓글 정렬
   field_parent_title: 상위 제목
+  field_is_private: Private issue
   field_editable: 편집가능
   field_watcher: 일감지킴이
   field_identity_url: OpenID URL
@@ -381,6 +382,8 @@ ko:
   permission_manage_versions: 버전 관리
   permission_manage_categories: 일감 범주 관리
   permission_add_issues: 일감 추가
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: 일감 편집
   permission_manage_issue_relations: 일감 관계 관리
   permission_add_issue_notes: 덧글 추가
@@ -547,6 +550,8 @@ ko:
   label_public_projects: 공개 프로젝트
   label_open_issues: 진행중
   label_open_issues_plural: 진행중
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: 완료됨
   label_closed_issues_plural: 완료됨
   label_x_open_issues_abbr_on_total:

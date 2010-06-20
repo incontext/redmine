@@ -276,6 +276,7 @@ mn:
   field_default_value: Стандарт утга
   field_comments_sorting: Тайлбаруудыг харуул
   field_parent_title: Эцэг хуудас
+  field_is_private: Private issue
   field_editable: Засварлагдана
   field_watcher: Харна
   field_identity_url: OpenID URL
@@ -347,6 +348,8 @@ mn:
   permission_manage_categories: Асуудлын ангиллууд
   permission_view_issues: Асуудлуудыг харах
   permission_add_issues: Асуудлууд нэмэх
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: Асуудлуудыг засварлах
   permission_manage_issue_relations: Асуудлын хамаарлыг зохицуулах
   permission_add_issue_notes: Тэмдэглэл нэмэх
@@ -519,6 +522,8 @@ mn:
   label_public_projects: Олон нийтийн төслүүд
   label_open_issues: нээлттэй
   label_open_issues_plural: нээлттэй
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: хаалттай
   label_closed_issues_plural: хаалттай
   label_x_open_issues_abbr_on_total:

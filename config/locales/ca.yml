@@ -289,6 +289,7 @@ ca:
   field_default_value: Valor predeterminat
   field_comments_sorting: Mostra els comentaris
   field_parent_title: Pàgina pare
+  field_is_private: Private issue
   field_editable: Es pot editar
   field_watcher: Vigilància
   field_identity_url: URL OpenID
@@ -361,6 +362,8 @@ ca:
   permission_manage_categories: Gestiona les categories dels assumptes
   permission_view_issues: "Visualitza els assumptes"
   permission_add_issues: Afegeix assumptes
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: Edita els assumptes
   permission_manage_issue_relations: Gestiona les relacions dels assumptes
   permission_add_issue_notes: Afegeix notes
@@ -536,6 +539,8 @@ ca:
   label_public_projects: Projectes públics
   label_open_issues: obert
   label_open_issues_plural: oberts
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: tancat
   label_closed_issues_plural: tancats
   label_x_open_issues_abbr_on_total:

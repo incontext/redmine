@@ -302,6 +302,7 @@ es:
   field_onthefly: Creación del usuario "al vuelo"
   field_parent: Proyecto padre
   field_parent_title: Página padre
+  field_is_private: Private issue
   field_password: Contraseña
   field_password_confirmation: Confirmación
   field_port: Puerto
@@ -540,6 +541,8 @@ es:
   label_not_equals: no igual
   label_open_issues: abierta
   label_open_issues_plural: abiertas
+  label_private_issues: private
+  label_private_issues_plural: private
   label_optional_description: Descripción opcional
   label_options: Opciones
   label_overall_activity: Actividad global
@@ -692,6 +695,8 @@ es:
   permission_add_issue_notes: Añadir notas
   permission_add_issue_watchers: Añadir seguidores
   permission_add_issues: Añadir peticiones
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_add_messages: Enviar mensajes
   permission_browse_repository: Hojear repositiorio
   permission_comment_news: Comentar noticias

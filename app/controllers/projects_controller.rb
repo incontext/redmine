@@ -156,6 +156,9 @@ class ProjectsController < ApplicationController
     @open_issues_by_tracker = Issue.visible.count(:group => :tracker,
                                             :include => [:project, :status, :tracker],
                                             :conditions => ["(#{cond}) AND #{IssueStatus.table_name}.is_closed=?", false])
+    @private_issues_by_tracker = Issue.count(:group => :tracker,
+                                             :include => [:project, :status, :tracker],
+                                             :conditions => ["(#{cond}) AND #{IssueStatus.table_name}.is_closed=? AND #{Issue.table_name}.is_private=?", false, true])
     @total_issues_by_tracker = Issue.visible.count(:group => :tracker,
                                             :include => [:project, :status, :tracker],
                                             :conditions => cond)

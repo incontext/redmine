@@ -245,6 +245,7 @@ nl:
   field_onthefly: On-the-fly aanmaken van een gebruiker
   field_parent: Subproject van
   field_parent_title: Bovenliggende pagina
+  field_is_private: Private issue
   field_password: Wachtwoord
   field_password_confirmation: Bevestigen
   field_port: Port
@@ -483,6 +484,8 @@ nl:
   label_not_equals: is niet gelijk
   label_open_issues: open
   label_open_issues_plural: open
+  label_private_issues: private
+  label_private_issues_plural: private
   label_optional_description: Optionele beschrijving
   label_options: Opties
   label_overall_activity: Activiteit
@@ -635,6 +638,8 @@ nl:
   permission_add_issue_notes: Voeg notities toe
   permission_add_issue_watchers: Voeg monitors toe
   permission_add_issues: Voeg issues toe
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_add_messages: Voeg berichten toe
   permission_browse_repository: Repository doorbladeren
   permission_comment_news: Nieuws commentaar geven

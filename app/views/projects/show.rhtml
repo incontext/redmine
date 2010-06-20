@@ -33,6 +33,7 @@
                                                 "tracker_id" => tracker.id %>:
 					<%= l(:label_x_open_issues_abbr_on_total, :count => @open_issues_by_tracker[tracker].to_i,
 																										:total => @total_issues_by_tracker[tracker].to_i) %>
+        (<%= @private_issues_by_tracker[tracker] || 0 %> <%= l(:label_private_issues, @private_issues_by_tracker[tracker] || 0) %>)
 			</li>
     <% end %>
     </ul>

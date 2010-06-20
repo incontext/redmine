@@ -413,6 +413,8 @@ cs:
   label_public_projects: Veřejné projekty
   label_open_issues: otevřený
   label_open_issues_plural: otevřené
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: uzavřený
   label_closed_issues_plural: uzavřené
   label_x_open_issues_abbr_on_total:
@@ -728,6 +730,7 @@ cs:
   setting_mail_handler_api_key: API klíč
   text_email_delivery_not_configured: "Doručování e-mailů není nastaveno a odesílání notifikací je zakázáno.\nNastavte Váš SMTP server v souboru config/email.yml a restartujte aplikaci."
   field_parent_title: Rodičovská stránka
+  field_is_private: Private issue
   label_issue_watchers: Sledování
   setting_commit_logs_encoding: Kódování zpráv při commitu
   button_quote: Citovat
@@ -741,6 +744,8 @@ cs:
   permission_edit_own_time_entries: Upravování vlastních zázamů o stráveném čase
   permission_manage_public_queries: Správa veřejných dotazů
   permission_add_issues: Přidávání úkolů
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Zaznamenávání stráveného času
   permission_view_changesets: Zobrazování sady změn
   permission_view_time_entries: Zobrazení stráveného času

@@ -12,6 +12,8 @@ roles_001:
     - :manage_categories
     - :view_issues
     - :add_issues
+    - :add_private_issues
+    - :view_private_issues
     - :edit_issues
     - :manage_issue_relations
     - :manage_subtasks
@@ -65,6 +67,7 @@ roles_002:
     - :manage_categories
     - :view_issues
     - :add_issues
+    - :view_private_issues
     - :edit_issues
     - :manage_issue_relations
     - :manage_subtasks
@@ -109,6 +112,7 @@ roles_003:
     - :manage_categories
     - :view_issues
     - :add_issues
+    - :add_private_issues
     - :edit_issues
     - :manage_issue_relations
     - :add_issue_notes
@@ -184,4 +188,41 @@ roles_005:
     - :view_changesets
 
   position: 5
+roles_006: 
+  name: Reporter2
+  id: 6
+  builtin: 0
+  permissions: |
+    --- 
+    - :edit_project
+    - :manage_members
+    - :manage_versions
+    - :manage_categories
+    - :view_issues
+    - :add_private_issues
+    - :edit_issues
+    - :manage_issue_relations
+    - :add_issue_notes
+    - :move_issues
+    - :view_issue_watchers
+    - :save_queries
+    - :view_gantt
+    - :view_calendar
+    - :log_time
+    - :view_time_entries
+    - :manage_news
+    - :comment_news
+    - :view_documents
+    - :manage_documents
+    - :view_wiki_pages
+    - :view_wiki_edits
+    - :edit_wiki_pages
+    - :delete_wiki_pages
+    - :add_messages
+    - :manage_boards
+    - :view_files
+    - :manage_files
+    - :browse_repository
+    - :view_changesets
 
+  position: 6

@@ -129,6 +129,7 @@ class Query < ActiveRecord::Base
     QueryColumn.new(:assigned_to, :sortable => ["#{User.table_name}.lastname", "#{User.table_name}.firstname", "#{User.table_name}.id"], :groupable => true),
     QueryColumn.new(:updated_on, :sortable => "#{Issue.table_name}.updated_on", :default_order => 'desc'),
     QueryColumn.new(:category, :sortable => "#{IssueCategory.table_name}.name", :groupable => true),
+    QueryColumn.new(:is_private, :sortable => "#{Issue.table_name}.is_private", :groupable => true),
     QueryColumn.new(:fixed_version, :sortable => ["#{Version.table_name}.effective_date", "#{Version.table_name}.name"], :default_order => 'desc', :groupable => true),
     QueryColumn.new(:start_date, :sortable => "#{Issue.table_name}.start_date"),
     QueryColumn.new(:due_date, :sortable => "#{Issue.table_name}.due_date"),
@@ -204,6 +205,7 @@ class Query < ActiveRecord::Base
     
     if User.current.logged?
       @available_filters["watcher_id"] = { :type => :list, :order => 15, :values => [["<< #{l(:label_me)} >>", "me"]] }
+      @available_filters["is_private"] = { :type => :list, :values => [[l(:general_text_yes), "1"], [l(:general_text_no), "0"]], :order => 16 }
     end
   
     if project
@@ -489,6 +491,9 @@ class Query < ActiveRecord::Base
       
     end if filters and valid?
     
+    db_table = Watcher.table_name
+    cu_id = User.current.id.to_s
+    filters_clauses <<  '(' + Project.allowed_to_condition(User.current, :view_private_issues) + " OR #{Issue.table_name}.is_private=0 OR #{Issue.table_name}.author_id=#{cu_id} OR #{Issue.table_name}.assigned_to_id=#{cu_id} OR #{Issue.table_name}.id IN (SELECT #{db_table}.watchable_id FROM #{db_table} WHERE #{db_table}.watchable_type='Issue' AND user_id=#{cu_id}))"
     (filters_clauses << project_statement).join(' AND ')
   end
   

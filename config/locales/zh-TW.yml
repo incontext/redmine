@@ -372,6 +372,7 @@
   field_default_value: 預設值
   field_comments_sorting: 註解排序
   field_parent_title: 父頁面
+  field_is_private: Private issue
   field_editable: 可編輯
   field_watcher: 觀察者
   field_identity_url: OpenID 網址
@@ -448,6 +449,8 @@
   permission_manage_categories: 管理項目分類
   permission_view_issues: 檢視項目
   permission_add_issues: 新增項目
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: 編輯項目
   permission_manage_issue_relations: 管理項目關聯
   permission_add_issue_notes: 新增筆記
@@ -623,6 +626,8 @@
   label_public_projects: 公開專案
   label_open_issues: 進行中
   label_open_issues_plural: 進行中
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: 已結束
   label_closed_issues_plural: 已結束
   label_x_open_issues_abbr_on_total:

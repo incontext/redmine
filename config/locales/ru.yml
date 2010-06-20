@@ -359,6 +359,7 @@ ru:
   field_port: Порт
   field_possible_values: Возможные значения
   field_priority: Приоритет
+  field_is_private: Частная задача
   field_project: Проект
   field_redirect_existing_links: Перенаправить существующие ссылки
   field_regexp: Регулярное выражение
@@ -601,6 +602,10 @@ ru:
   label_not_contains: не содержит
   label_not_equals: не соответствует
   label_open_issues: открыт
+  label_private_issues_plural2: частных
+  label_private_issues_plural5: частных
+  label_private_issues_plural: частных
+  label_private_issues: частная
   label_open_issues_plural: открыто
   label_open_issues_plural2: открыто
   label_open_issues_plural5: открыто
@@ -795,6 +800,8 @@ ru:
 
   permission_add_issues: Добавление задач
   permission_add_issue_notes: Добавление примечаний
+  permission_add_private_issues: Добавление частных задач
+  permission_view_private_issues: Просмотр частных задач
   permission_add_issue_watchers: Добавление наблюдателей
   permission_add_messages: Отправка сообщений
   permission_browse_repository: Просмотр хранилища

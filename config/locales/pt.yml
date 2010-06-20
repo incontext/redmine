@@ -273,6 +273,7 @@ pt:
   field_default_value: Valor por omissão
   field_comments_sorting: Mostrar comentários
   field_parent_title: Página pai
+  field_is_private: Private issue
   
   setting_app_title: Título da aplicação
   setting_app_subtitle: Sub-título da aplicação
@@ -432,6 +433,8 @@ pt:
   label_public_projects: Projectos públicos
   label_open_issues: aberto
   label_open_issues_plural: abertos
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: fechado
   label_closed_issues_plural: fechados
   label_x_open_issues_abbr_on_total:
@@ -749,6 +752,8 @@ pt:
   permission_edit_own_time_entries: Editar horas pessoais
   permission_manage_public_queries: Gerir queries públicas
   permission_add_issues: Adicionar tarefas
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Registar tempo gasto
   permission_view_changesets: Ver changesets
   permission_view_time_entries: Ver tempo gasto

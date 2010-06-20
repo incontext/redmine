@@ -266,6 +266,7 @@ pl:
   field_onthefly: Tworzenie użytkownika w locie
   field_parent: Nadprojekt
   field_parent_title: Strona rodzica
+  field_is_private: Private issue
   field_password: Hasło
   field_password_confirmation: Potwierdzenie
   field_port: Port
@@ -516,6 +517,8 @@ pl:
   label_not_equals: różni się
   label_open_issues: otwarte
   label_open_issues_plural234: otwarte
+  label_private_issues: private
+  label_private_issues_plural: private
   label_open_issues_plural5: otwarte
   label_open_issues_plural: otwarte
   label_optional_description: Opcjonalny opis
@@ -670,6 +673,8 @@ pl:
   permission_add_issue_notes: Dodawanie notatek
   permission_add_issue_watchers: Dodawanie obserwatorów
   permission_add_issues: Dodawanie zagadnień
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_add_messages: Dodawanie wiadomości
   permission_browse_repository: Przeglądanie repozytorium
   permission_comment_news: Komentowanie komunikatów

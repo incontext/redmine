@@ -135,6 +135,10 @@ module IssuesHelper
         label = l(:field_parent_issue)
         value = "##{detail.value}" unless detail.value.blank?
         old_value = "##{detail.old_value}" unless detail.old_value.blank?
+
+      when detail.prop_key == 'is_private'
+        value = l(detail.value == "1" ? :general_text_Yes : :general_text_No)
+        old_value = l(detail.old_value == "1" ? :general_text_Yes : :general_text_No)
       end
     when 'cf'
       custom_field = CustomField.find_by_id(detail.prop_key)
@@ -201,6 +205,7 @@ module IssuesHelper
                   l(:field_priority),
                   l(:field_subject),
                   l(:field_assigned_to),
+                  l(:field_is_private),
                   l(:field_category),
                   l(:field_fixed_version),
                   l(:field_author),
@@ -228,6 +233,7 @@ module IssuesHelper
                   issue.priority.name,
                   issue.subject,
                   issue.assigned_to,
+                  issue.is_private,
                   issue.category,
                   issue.fixed_version,
                   issue.author.name,

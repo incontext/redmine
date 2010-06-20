@@ -366,6 +366,8 @@ bg:
   label_public_projects: Публични проекти
   label_open_issues: отворена
   label_open_issues_plural: отворени
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: затворена
   label_closed_issues_plural: затворени
   label_x_open_issues_abbr_on_total:
@@ -722,6 +724,7 @@ bg:
   setting_mail_handler_api_key: API key
   text_email_delivery_not_configured: "Email delivery is not configured, and notifications are disabled.\nConfigure your SMTP server in config/email.yml and restart the application to enable them."
   field_parent_title: Parent page
+  field_is_private: Private issue
   label_issue_watchers: Watchers
   setting_commit_logs_encoding: Commit messages encoding
   button_quote: Quote
@@ -735,6 +738,8 @@ bg:
   permission_edit_own_time_entries: Edit own time logs
   permission_manage_public_queries: Manage public queries
   permission_add_issues: Add issues
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Log spent time
   permission_view_changesets: View changesets
   permission_view_time_entries: View spent time

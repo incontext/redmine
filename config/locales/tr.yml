@@ -436,6 +436,8 @@ tr:
   label_public_projects: Genel Projeler
   label_open_issues: açık
   label_open_issues_plural: açık
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: kapalı
   label_closed_issues_plural: kapalı
   label_x_open_issues_abbr_on_total:
@@ -742,6 +744,7 @@ tr:
   label_generate_key: Generate a key
   setting_sequential_project_identifiers: Generate sequential project identifiers
   field_parent_title: Parent page
+  field_is_private: Private issue
   text_email_delivery_not_configured: "Email delivery is not configured, and notifications are disabled.\nConfigure your SMTP server in config/email.yml and restart the application to enable them."
   text_enumeration_category_reassign_to: 'Reassign them to this value:'
   label_issue_watchers: Watchers
@@ -764,6 +767,8 @@ tr:
   permission_edit_own_time_entries: Edit own time logs
   permission_manage_public_queries: Manage public queries
   permission_add_issues: Add issues
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Log spent time
   permission_view_changesets: View changesets
   permission_view_time_entries: View spent time

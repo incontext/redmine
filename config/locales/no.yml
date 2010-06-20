@@ -409,6 +409,8 @@
   label_public_projects: Offentlige prosjekt
   label_open_issues: åpen
   label_open_issues_plural: åpne
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: lukket
   label_closed_issues_plural: lukkede
   label_x_open_issues_abbr_on_total:

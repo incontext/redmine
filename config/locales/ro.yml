@@ -256,6 +256,7 @@ ro:
   field_default_value: Valoare implicita
   field_comments_sorting: Afișează comentarii
   field_parent_title: Pagina superioara
+  field_is_private: Private issue
   field_editable: Modificabil
   field_watcher: Urmărește
   field_identity_url: URL OpenID
@@ -310,6 +311,8 @@ ro:
   permission_manage_versions: Editează versiuni
   permission_manage_categories: Editează categorii
   permission_add_issues: Adaugă tichete
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: Editează tichete
   permission_manage_issue_relations: Editează relații tichete
   permission_add_issue_notes: Adaugă note
@@ -476,6 +479,8 @@ ro:
   label_public_projects: Proiecte publice
   label_open_issues: deschis
   label_open_issues_plural: deschise
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: închis
   label_closed_issues_plural: închise
   label_x_open_issues_abbr_on_total:

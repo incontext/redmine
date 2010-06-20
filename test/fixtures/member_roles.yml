@@ -47,3 +47,13 @@ member_roles_011:
   role_id: 2
   member_id: 10
   inherited_from: 10
+member_roles_012: 
+  id: 12
+  role_id: 3
+  member_id: 11
+  inherited_from: 11
+member_roles_013: 
+  id: 13
+  role_id: 6
+  member_id: 12
+  inherited_from: 12

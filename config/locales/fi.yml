@@ -418,6 +418,8 @@ fi:
   label_public_projects: Julkiset projektit
   label_open_issues: avoin, yhteensä
   label_open_issues_plural: avointa, yhteensä
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: suljettu
   label_closed_issues_plural: suljettua
   label_x_open_issues_abbr_on_total:
@@ -753,6 +755,7 @@ fi:
   setting_mail_handler_api_key: API avain
   text_email_delivery_not_configured: "Sähköpostin jakelu ei ole määritelty ja sähköpostimuistutukset eivät ole käytössä.\nKonfiguroi sähköpostipalvelinasetukset (SMTP) config/email.yml tiedostosta ja uudelleenkäynnistä sovellus jotta asetukset astuvat voimaan."
   field_parent_title: Aloitussivu
+  field_is_private: Private issue
   label_issue_watchers: Tapahtuman seuraajat
   button_quote: Vastaa
   setting_sequential_project_identifiers: Luo peräkkäiset projektien tunnisteet
@@ -766,6 +769,8 @@ fi:
   permission_edit_own_time_entries: Muokka omia aikamerkintöjä
   permission_manage_public_queries: Hallinnoi julkisia hakuja
   permission_add_issues: Lisää tapahtumia
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_log_time: Lokita käytettyä aikaa
   permission_view_changesets: Näytä muutosryhmät
   permission_view_time_entries: Näytä käytetty aika

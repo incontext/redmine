@@ -91,9 +91,9 @@ class Issue < ActiveRecord::Base
   after_destroy :destroy_children
   after_destroy :update_parent_attributes
   
-  # Returns true if usr or current user is allowed to view the issue
-  def visible?(usr=nil)
-    (usr || User.current).allowed_to?(:view_issues, self.project)
+  # Returns true if user is allowed to view the issue
+  def visible?(user=User.current)
+    user.allowed_to?(:view_issues, self.project) && (is_private==false || user.allowed_to?(:view_private_issues, self.project) || author == user || assigned_to == user || watched_by?(user))
   end
   
   def after_initialize
@@ -222,6 +222,7 @@ class Issue < ActiveRecord::Base
     category_id
     assigned_to_id
     priority_id
+    is_private
     fixed_version_id
     subject
     description
@@ -776,10 +777,15 @@ class Issue < ActiveRecord::Base
     journal.save
   end
   
-  # Default assignment based on category
+  # Default assignment based on category and is_private
   def default_assign
     if assigned_to.nil? && category && category.assigned_to
       self.assigned_to = category.assigned_to
+    end
+    if author.allowed_to?(:add_private_issues, self.project)
+      self.is_private=1 unless author.allowed_to?(:add_issues, self.project)
+    else
+      self.is_private=0
     end
   end
 

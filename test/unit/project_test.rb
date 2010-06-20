@@ -136,10 +136,10 @@ class ProjectTest < ActiveSupport::TestCase
   end
   
   def test_destroy
-    # 2 active members
-    assert_equal 2, @ecookbook.members.size
+    # 4 active members
+    assert_equal 4, @ecookbook.members.size
     # and 1 is locked
-    assert_equal 3, Member.find(:all, :conditions => ['project_id = ?', @ecookbook.id]).size
+    assert_equal 5, Member.find(:all, :conditions => ['project_id = ?', @ecookbook.id]).size
     # some boards
     assert @ecookbook.boards.any?
     

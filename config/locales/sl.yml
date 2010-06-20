@@ -260,6 +260,7 @@ sl:
   field_default_value: Privzeta vrednost
   field_comments_sorting: Prikaži komentarje
   field_parent_title: Matična stran
+  field_is_private: Private issue
   
   setting_app_title: Naslov aplikacije
   setting_app_subtitle: Podnaslov aplikacije
@@ -307,6 +308,8 @@ sl:
   permission_manage_versions: Uredi verzije
   permission_manage_categories: Urejanje kategorij zahtevkov
   permission_add_issues: Dodaj zahtevke
+  permission_add_private_issues: Add private issues
+  permission_view_private_issues: View private issues
   permission_edit_issues: Uredi zahtevke
   permission_manage_issue_relations: Uredi odnose med zahtevki
   permission_add_issue_notes: Dodaj zabeležke
@@ -472,6 +475,8 @@ sl:
   label_public_projects: Javni projekti
   label_open_issues: odpri zahtevek
   label_open_issues_plural: odpri zahtevke
+  label_private_issues: private
+  label_private_issues_plural: private
   label_closed_issues: zapri zahtevek
   label_closed_issues_plural: zapri zahtevke
   label_x_open_issues_abbr_on_total:
