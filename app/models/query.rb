@@ -488,22 +488,22 @@ class Query < ActiveRecord::Base
         sql << '(' + sql_for_field(field, operator, v, db_table, db_field) + ')'
       end
       filters_clauses << sql
-      
+
     end if filters and valid?
-    
+
     db_table = Watcher.table_name
     cu_id = User.current.id.to_s
-    filters_clauses <<  '(' + Project.allowed_to_condition(User.current, :view_private_issues) + " OR #{Issue.table_name}.is_private=0 OR #{Issue.table_name}.author_id=#{cu_id} OR #{Issue.table_name}.assigned_to_id=#{cu_id} OR #{Issue.table_name}.id IN (SELECT #{db_table}.watchable_id FROM #{db_table} WHERE #{db_table}.watchable_type='Issue' AND user_id=#{cu_id}))"
+    filters_clauses <<  '(' + Project.allowed_to_condition(User.current, :view_private_issues) + " OR #{Issue.table_name}.is_private is FALSE OR #{Issue.table_name}.author_id=#{cu_id} OR #{Issue.table_name}.assigned_to_id=#{cu_id} OR #{Issue.table_name}.id IN (SELECT #{db_table}.watchable_id FROM #{db_table} WHERE #{db_table}.watchable_type='Issue' AND user_id=#{cu_id}))"
     (filters_clauses << project_statement).join(' AND ')
   end
-  
+
   # Returns the issue count
   def issue_count
     Issue.count(:include => [:status, :project], :conditions => statement)
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)
   end
-  
+
   # Returns the issue count by group or nil if query is not grouped
   def issue_count_by_group
     r = nil
