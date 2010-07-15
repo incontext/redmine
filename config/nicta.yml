@@ -1,8 +1,11 @@
 development:
   git_dir: /var/cache/git/development/
+  fs_dir: /var/cache/nicta_scripts/development/
 
 test:
   git_dir: /var/cache/git/test/
+  fs_dir: /var/cache/nicta_scripts/test/
 
 production:
   git_dir: /var/cache/git/production/
+  fs_dir: /var/cache/nicta_scripts/production/

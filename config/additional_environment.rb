@@ -10,4 +10,4 @@
 #   config.gem "aws-s3", :lib => "aws/s3"
 #   ...
 #
-
+config.gem "haml"
