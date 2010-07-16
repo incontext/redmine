@@ -1,11 +1,26 @@
 development:
   git_dir: /var/cache/git/development/
-  fs_dir: /var/cache/nicta_scripts/development/
+  experiment_types:
+    - Wifi
+    - Ethernet
+    - 3G
+    - DSRC
+    - IREEL
 
 test:
   git_dir: /var/cache/git/test/
-  fs_dir: /var/cache/nicta_scripts/test/
+  experiment_types:
+    - Wifi
+    - Ethernet
+    - 3G
+    - DSRC
+    - IREEL
 
 production:
   git_dir: /var/cache/git/production/
-  fs_dir: /var/cache/nicta_scripts/production/
+  experiment_types:
+    - Wifi
+    - Ethernet
+    - 3G
+    - DSRC
+    - IREEL
