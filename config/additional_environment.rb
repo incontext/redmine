@@ -11,3 +11,4 @@
 #   ...
 #
 config.gem "haml"
+config.gem "grit"
