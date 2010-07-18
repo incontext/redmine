@@ -1,4 +1,11 @@
 --- 
+vendor/plugins/weekly_builder: 
+  squashed: true
+  url: git://github.com/dmix/weekly_builder.git
+  branch: master
+  type: git
+  revision: 9c790bd99dce84da4c86203587890e31c05cd756
+  remote: braid/vendor/plugins/weekly-builder
 vendor/plugins/captcha: 
   squashed: true
   branch: master
