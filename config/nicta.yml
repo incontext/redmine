@@ -6,6 +6,10 @@ development:
     - 3G
     - DSRC
     - IREEL
+  resources:
+    - node1
+    - node2
+    - node3
 
 test:
   git_dir: /var/cache/git/test/
