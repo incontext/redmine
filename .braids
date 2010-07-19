@@ -1,15 +1,15 @@
 --- 
 vendor/plugins/weekly_builder: 
   squashed: true
-  branch: master
   url: git://github.com/dmix/weekly_builder.git
+  branch: master
   type: git
   revision: 9c790bd99dce84da4c86203587890e31c05cd756
   remote: braid/vendor/plugins/weekly-builder
 vendor/plugins/captcha: 
   squashed: true
-  url: git://github.com/winton/captcha.git
   branch: master
+  url: git://github.com/winton/captcha.git
   type: git
   revision: f39c738fce9111b311e5fef43847a01921af086e
   remote: braid/vendor/plugins/captcha
@@ -18,5 +18,5 @@ vendor/plugins/redmine_nicta:
   branch: master
   url: git@github.com:incontext/redmine_nicta.git
   type: git
-  revision: feb48335f963f4de9449a3561a10ce71e4bba97f
+  revision: 62962b0f6a80b3b54fce8234d63a1c824c1c3833
   remote: braid/vendor/plugins/redmine-nicta
