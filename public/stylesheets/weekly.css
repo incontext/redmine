@@ -57,7 +57,7 @@
   border-top: 1px solid #dddddd;
   position: relative; }
   #day_row #week_event {
-    background: #528800;
+    background: #4e5d6c;
     float: left;
     position: absolute;
     height: 51px;
@@ -67,10 +67,14 @@
     filter: alpha(opacity=80);
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px; }
+    #day_row #week_event:hover {
+      background: #8997a5; }
+    #day_row #week_event.approved {
+      background: #528800; }
+    #day_row #week_event.approved:hover {
+      background: #8cbf40; }
     #day_row #week_event a {
       color: white; }
-    #day_row #week_event:hover {
-      background: #8cbf40; }
   #day_row #click_hour {
     height: 42px;
     width: 55px;
@@ -89,7 +93,7 @@
   border-top: 1px solid #dddddd;
   position: relative; }
   #full_day_row #week_event {
-    background: #528800;
+    background: #4e5d6c;
     float: left;
     position: absolute;
     height: 51px;
@@ -99,10 +103,14 @@
     filter: alpha(opacity=80);
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px; }
+    #full_day_row #week_event:hover {
+      background: #8997a5; }
+    #full_day_row #week_event.approved {
+      background: #528800; }
+    #full_day_row #week_event.approved:hover {
+      background: #8cbf40; }
     #full_day_row #week_event a {
       color: white; }
-    #full_day_row #week_event:hover {
-      background: #8cbf40; }
 
 #full_header_row {
   width: 1800px;

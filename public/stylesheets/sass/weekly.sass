@@ -3,8 +3,10 @@
 
 $base_height = 24px
 $border-color = #ddd
-$event-background-light = #8CBF40
-$event-background = #528800
+$event-background-1 = #4E5D6C
+$event-background-light-1 = #8997A5
+$event-background-2 = #528800
+$event-background-light-2 = #8CBF40
 
 #week
   background: #FFF
@@ -65,7 +67,7 @@ $event-background = #528800
   border-top: 1px solid $border-color
   position: relative
   #week_event
-    background: $event-background
+    background: $event-background-1
     float: left
     position: absolute
     height: $base_height + 27
@@ -75,10 +77,16 @@ $event-background = #528800
     filter: alpha(opacity = 80)
     -moz-border-radius: 5px
     -webkit-border-radius: 5px
+
+    &:hover
+      background: $event-background-light-1
+
+    &.approved
+      background: $event-background-2
+    &.approved:hover
+      background: $event-background-light-2
     a
       color: #fff
-    &:hover
-      background: $event-background-light
   #click_hour
     height: $base_height + 18
     width: 55px
@@ -98,7 +106,7 @@ $event-background = #528800
   border-top: 1px solid $border-color
   position: relative
   #week_event
-    background: $event-background
+    background: $event-background-1
     float: left
     position: absolute
     height: $base_height + 27
@@ -108,10 +116,14 @@ $event-background = #528800
     filter: alpha(opacity = 80)
     -moz-border-radius: 5px
     -webkit-border-radius: 5px
+    &:hover
+      background: $event-background-light-1
+    &.approved
+      background: $event-background-2
+    &.approved:hover
+      background: $event-background-light-2
     a
       color: #fff
-    &:hover
-      background: $event-background-light
 
 #full_header_row
   width: 1800px
