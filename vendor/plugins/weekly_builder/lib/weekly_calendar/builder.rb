@@ -5,21 +5,21 @@ class WeeklyCalendar::Builder
     raise ArgumentError, "WeeklyBuilder expects an Array but found a #{objects.inspect}" unless objects.is_a? Array
     @objects, @template, @options, @start_date, @end_date = objects, template, options, start_date, end_date
   end
-  
-  def days      
+
+  def days
     concat(tag("div", :id => "days"))
       concat(content_tag("div", "Weekly View", :id => "placeholder"))
-      for day in @start_date..@end_date        
+      for day in @start_date..@end_date
         concat(tag("div", :id => "day"))
         concat(content_tag("b", day.strftime('%A')))
         concat(tag("br"))
         concat(day.strftime('%B %d'))
         concat("</div>")
       end
-    concat("</div>")      
+    concat("</div>")
   end
-  
-  def week(options = {})    
+
+  def week(options = {})
     days
     if options[:business_hours] == "true" or options[:business_hours].blank?
       hours = ["6am","7am","8am","9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm","6pm","7pm","8pm"]
@@ -36,7 +36,7 @@ class WeeklyCalendar::Builder
       start_hour = 1
       end_hour = 24
     end
-    
+
     concat(tag("div", :id => "hours"))
       concat(tag("div", :id => header_row))
         for hour in hours
@@ -44,14 +44,14 @@ class WeeklyCalendar::Builder
           concat(content_tag("div", header_box, :id => "header_box"))
         end
       concat("</div>")
-      
+
       concat(tag("div", :id => grid))
-        for day in @start_date..@end_date 
+        for day in @start_date..@end_date
           concat(tag("div", :id => day_row))
           for event in @objects
-            if event.starts_at.strftime('%j').to_s == day.strftime('%j').to_s 
+            if event.starts_at.strftime('%j').to_s == day.strftime('%j').to_s
              if event.starts_at.strftime('%H').to_i >= start_hour and event.ends_at.strftime('%H').to_i <= end_hour
-                concat(tag("div", :id => "week_event", :style =>"left:#{left(event.starts_at,options[:business_hours])}px;width:#{width(event.starts_at,event.ends_at)}px;", :onclick => "location.href='/events/#{event.id}';"))
+                concat(tag("div", :id => "week_event", :style =>"left:#{left(event.starts_at,options[:business_hours])}px;width:#{width(event.starts_at,event.ends_at)}px;"))
                   truncate = truncate_width(width(event.starts_at,event.ends_at))
                   yield(event,truncate)
                 concat("</div>")
@@ -63,9 +63,9 @@ class WeeklyCalendar::Builder
       concat("</div>")
     concat("</div>")
   end
-  
+
   private
-  
+
     def concat(tag)
       @template.concat(tag)
     end
@@ -88,17 +88,17 @@ class WeeklyCalendar::Builder
       end_hours = ends_at.strftime('%H').to_i * 60 # 5 * 60 = 300
       end_minutes = ends_at.strftime('%M').to_i + end_hours # 30 + 300 = 330
       difference =  (end_minutes.to_i - start_minutes.to_i) * 1.25 # (330 - 180) = 150 * 1.25 = 187.5
-    
+
       unless difference < 60
         width = difference - 12
       else
         width = 63 #default width (75px minus padding+border)
       end
     end
-  
+
     def truncate_width(width)
       hours = width / 63
       truncate_width = 20 * hours
     end
-    
+
 end

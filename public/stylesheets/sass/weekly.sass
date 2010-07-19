@@ -1,0 +1,133 @@
+/* -- WeeklyBuilder --
+/* layout
+
+$base_height = 24px
+$border-color = #ddd
+$event-background-light = #8CBF40
+$event-background = #528800
+
+#week
+  background: #FFF
+  width: 100%
+  height: 100%
+  border: 1px solid $border-color
+  overflow: hidden
+
+#days
+  float: left
+  width: 10%
+
+#hours
+  width: 90%
+  float: right
+  overflow: auto
+
+#grid
+  background-color: #fff
+  background-attachment: inherit
+  width: 1125px
+
+/* boxes
+
+#header_row
+  width: 1125px
+  height: $base_height + 15
+  background: #EEE
+  //margin-bottom: 1px
+
+#header_box
+  height: $base_height - 3
+  width: 55px
+  border-right: 1px solid $border-color
+  padding: 17px 1px 0px 18px
+  float: left
+
+#hour
+  height: $base_height + 11
+  width: 55px
+  padding: 25px 0px 0px 20px
+  float: left
+
+#day
+  height: $base_height + 18
+  border-right: 1px solid $border-color
+  border-top: 1px solid $border-color
+  padding: 17px 0px 0px 18px
+
+#placeholder
+  height: $base_height
+  border-right: 1px solid $border-color
+  padding: 15px 0px 0px 18px
+
+#day_row
+  width: 1125px
+  height: $base_height + 35
+  border-top: 1px solid $border-color
+  position: relative
+  #week_event
+    background: $event-background
+    float: left
+    position: absolute
+    height: $base_height + 27
+    color: #fff
+    padding: 4px
+    opacity: 0.80
+    filter: alpha(opacity = 80)
+    -moz-border-radius: 5px
+    -webkit-border-radius: 5px
+    a
+      color: #fff
+    &:hover
+      background: $event-background-light
+  #click_hour
+    height: $base_height + 18
+    width: 55px
+    border-right: 1px solid $border-color
+    padding: 17px 1px 0px 18px
+    float: left
+    a
+      color: #000
+    &:hover
+      background: #C7F980
+
+/* 24-hour calendar view
+
+#full_day_row
+  width: 1800px
+  height: $base_height + 35
+  border-top: 1px solid $border-color
+  position: relative
+  #week_event
+    background: $event-background
+    float: left
+    position: absolute
+    height: $base_height + 27
+    color: #fff
+    padding: 4px
+    opacity: 0.80
+    filter: alpha(opacity = 80)
+    -moz-border-radius: 5px
+    -webkit-border-radius: 5px
+    a
+      color: #fff
+    &:hover
+      background: $event-background-light
+
+#full_header_row
+  width: 1800px
+  height: $base_height + 15
+  background: #EEE
+
+#full_grid
+  width: 1800px
+
+#full_day_row #click_hour
+  height: $base_height + 18
+  width: 55px
+  border-right: 1px solid $border-color
+  padding: 17px 1px 0px 18px
+  float: left
+  a
+    color: #000
+  &:hover
+    background: #C7F980
