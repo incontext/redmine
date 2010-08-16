@@ -6,6 +6,13 @@ vendor/plugins/weekly_builder:
   type: git
   revision: 9c790bd99dce84da4c86203587890e31c05cd756
   remote: braid/vendor/plugins/weekly-builder
+vendor/plugins/app_config: 
+  squashed: true
+  url: http://github.com/merbjedi/app_config.git
+  branch: master
+  type: git
+  revision: 5fba89d4b34c3cd32922adfeab9464fa3466d9cf
+  remote: braid/vendor/plugins/app-config
 vendor/plugins/captcha: 
   squashed: true
   branch: master
