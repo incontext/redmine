@@ -1,0 +1,10 @@
+experiment_types:
+  - Wifi
+  - Ethernet
+  - 3G
+  - DSRC
+  - IREEL
+resources:
+  - node1
+  - node2
+  - node3
