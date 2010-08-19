@@ -8,3 +8,9 @@ resources:
   - node1
   - node2
   - node3
+gcal:
+  account: jhong@incontext.com.au
+  password: Loyalty225
+  calendars:
+    - identifier: v8i5bns2ndjajh1i1bbn97f520%40group.calendar.google.com
+      private_address: http://www.google.com/calendar/embed?src=v8i5bns2ndjajh1i1bbn97f520%40group.calendar.google.com&ctz=Australia/Sydney&pvttk=6d15610c34418191a0b91b12435aabf5

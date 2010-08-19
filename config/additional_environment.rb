@@ -12,3 +12,5 @@
 #
 config.gem "haml"
 config.gem "grit"
+config.gem "gcal4ruby"
+config.gem "aasm"
