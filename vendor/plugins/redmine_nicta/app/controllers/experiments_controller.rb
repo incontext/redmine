@@ -2,7 +2,7 @@ class ExperimentsController < ApplicationController
   unloadable
 
   before_filter :find_project, :authorize
-  before_filter :define_git_repo, :only => [:edit, :commit, :change_experiment]
+  before_filter :define_git_repo, :only => [:edit, :commit, :change_experiment, :change_experiment_version, :copy]
 
   attr_accessor :experiment_properties
 
@@ -32,10 +32,29 @@ class ExperimentsController < ApplicationController
     tree = @repo.tree("#{params[:version] || 'HEAD'}", @script_path)
     unless tree.contents.empty?
       @script = tree.contents.first
-      @commits = @repo.log('HEAD', @script_path)
+      @commits = @experiment.commits
       @commit = @commits.find {|v| v.sha == params[:version].to_s} || @commits.first
       @content = @script.data
     end
+  end
+
+  def edit_copy
+    @experiment = Experiment.find(params[:id])
+    unique_identifier = "#{@project.identifier}_#{@experiment.identifier}"
+    @experiment.identifier = unique_identifier
+  end
+
+  def copy
+    @source_experiment = Experiment.find(params[:id])
+    @experiment = Experiment.new(params[:experiment])
+    @experiment.user = find_current_user
+    begin
+      @experiment.copy_to_project(@source_experiment)
+      flash[:notice] = 'Experiment copied successfully'
+    rescue => e
+      flash[:error] = 'Failed to copy experiment' + e.message
+    end
+    redirect_to experiments_url(:project_id => @project)
   end
 
   def commit
@@ -61,6 +80,22 @@ class ExperimentsController < ApplicationController
     end
   end
 
+  def change_experiment_version
+    @experiment = Experiment.find(params[:experiment_id])
+    @script_path = @experiment.script_path
+    tree = @repo.tree(params[:experiment_version], @script_path)
+    define_attributes(tree.contents.first.data)
+    form_fields = ""
+    render :update do |page|
+      @experiment_properties.each do |p|
+        form_fields << "<p>"
+        form_fields << label_tag(p[0]) + text_field_tag("issue[experiment_attributes][#{p[0]}]", p[1])
+        form_fields << "</p>"
+      end
+      page.replace_html "experiment_properties", form_fields
+    end
+  end
+
   def change_experiment
     @experiment = Experiment.find(params[:experiment_id])
     @script_path = @experiment.script_path
@@ -74,6 +109,7 @@ class ExperimentsController < ApplicationController
         form_fields << "</p>"
       end
       page.replace_html "experiment_properties", form_fields
+      page.replace_html "issue_experiment_version", options_for_select(@experiment.commits.collect {|v| v.sha})
     end
   end
 

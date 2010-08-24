@@ -19,6 +19,14 @@ module ProjectModelPatch
   end
 
   module InstanceMethods
+    def committed_experiments
+      experiments.find_all {|v| v.script_committed?}
+    end
+
+    def available_reservations
+      reservations.approved
+    end
+
     private
 
     def init_git_repository

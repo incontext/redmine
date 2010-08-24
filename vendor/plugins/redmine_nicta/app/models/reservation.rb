@@ -17,7 +17,7 @@ class Reservation < ActiveRecord::Base
   end
 
   aasm_event :deny do
-    transitions :to => :denied, :from => [:pending, :approved]
+    transitions :to => :denied, :from => :pending
   end
 
   def add_to_google_calendar
@@ -31,5 +31,9 @@ class Reservation < ActiveRecord::Base
       :end_time => ends_at,
       :where => resource})
     event.save
+  end
+
+  def print
+    "#{resource} #{starts_at.strftime('%Y-%m-%d %H:%M:%S')}-#{ends_at.strftime('%Y-%m-%d %H:%M:%S')}"
   end
 end
