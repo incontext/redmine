@@ -2,9 +2,7 @@ class ExperimentsController < ApplicationController
   unloadable
 
   before_filter :find_project, :authorize
-  before_filter :define_git_repo, :only => [:edit, :commit, :change_experiment, :change_experiment_version, :copy]
-
-  attr_accessor :experiment_properties
+  before_filter :find_experiment, :authorize, :only => [:show, :edit, :edit_copy, :commit, :change_experiment_version, :change_experiment]
 
   def index
     @experiments = @project.experiments.all
@@ -14,34 +12,33 @@ class ExperimentsController < ApplicationController
     @experiment = Experiment.new(:project_id => @project)
   end
 
+  def show
+    version = params[:version] || 'HEAD'
+    script_content = @experiment.script_content(version)
+    if script_content.nil?
+      render_404
+    else
+      send_data script_content, :filename => @experiment.script_path
+    end
+  end
+
   def create
     @experiment = Experiment.new(params[:experiment])
     @experiment.project = @project
     @experiment.user = find_current_user
     if @experiment.save
       flash[:notice] = 'Experiment created successfully'
-      redirect_to experiments_url(:project_id => @project)
+      redirect_to project_experiments_path(@project)
     else
       render :template => 'experiments/new'
     end
   end
 
   def edit
-    @experiment = Experiment.find(params[:id])
-    @script_path = @experiment.script_path
-    tree = @repo.tree("#{params[:version] || 'HEAD'}", @script_path)
-    unless tree.contents.empty?
-      @script = tree.contents.first
-      @commits = @experiment.commits
-      @commit = @commits.find {|v| v.sha == params[:version].to_s} || @commits.first
-      @content = @script.data
-    end
+    @revision = @experiment.revision(params[:version])
   end
 
   def edit_copy
-    @experiment = Experiment.find(params[:id])
-    unique_identifier = "#{@project.identifier}_#{@experiment.identifier}"
-    @experiment.identifier = unique_identifier
   end
 
   def copy
@@ -54,87 +51,53 @@ class ExperimentsController < ApplicationController
     rescue => e
       flash[:error] = 'Failed to copy experiment' + e.message
     end
-    redirect_to experiments_url(:project_id => @project)
+    redirect_to project_experiments_path(@project)
   end
 
   def commit
-    @experiment = Experiment.find(params[:id])
-    @script_path = @experiment.script_path
-
-    begin
-      Dir.chdir(AppConfig.git_dir + @project.identifier) do
-        f = File.open(@script_path, 'w')
-        f.write(params[:script_content])
-        f.close
-        @repo.add(@script_path)
-        @repo.commit_index(params[:message] + " (updated by #{User.current.login} at #{Time.now.to_s})")
-      end
-      flash[:notice] = 'Experiment script committed to repository'
-      redirect_to experiments_url(:project_id => @project)
-    rescue => e
-      Dir.chdir(AppConfig.git_dir + @project.identifier) do
-        system "git reset --hard"
-      end
-      flash[:error] = 'Failed to commit changes.' + e.message
-      redirect_to edit_experiment_url(@experiment, :project_id => @project)
-    end
+    script_path = @experiment.script_path
+    @experiment.commit(params[:script_content],
+                       params[:message] + " (updated by #{User.current.login} at #{Time.now.to_s})")
+    flash[:notice] = 'Experiment script committed to repository'
+    redirect_to project_experiments_url(:project_id => @project)
+  rescue => e
+    flash[:error] = 'Failed to commit changes.' + e.message
+    redirect_to edit_project_experiment_path(@project, @experiment)
   end
 
   def change_experiment_version
-    @experiment = Experiment.find(params[:experiment_id])
-    @script_path = @experiment.script_path
-    tree = @repo.tree(params[:experiment_version], @script_path)
-    define_attributes(tree.contents.first.data)
-    form_fields = ""
+    @experiment.define_attributes(@experiment.script_content(params[:version]))
     render :update do |page|
-      @experiment_properties.each do |p|
-        form_fields << "<p>"
-        form_fields << label_tag(p[0]) + text_field_tag("issue[experiment_attributes][#{p[0]}]", p[1])
-        form_fields << "</p>"
-      end
-      page.replace_html "experiment_properties", form_fields
+      page.replace_html "experiment_properties", render_properties(@experiment.experiment_properties)
     end
   end
 
   def change_experiment
-    @experiment = Experiment.find(params[:experiment_id])
-    @script_path = @experiment.script_path
-    tree = @repo.tree('HEAD', @script_path)
-    define_attributes(tree.contents.first.data)
+    @experiment.define_attributes(@experiment.script_content)
     form_fields = ""
     render :update do |page|
-      @experiment_properties.each do |p|
-        form_fields << "<p>"
-        form_fields << label_tag(p[0]) + text_field_tag("issue[experiment_attributes][#{p[0]}]", p[1])
-        form_fields << "</p>"
-      end
-      page.replace_html "experiment_properties", form_fields
-      page.replace_html "issue_experiment_version", options_for_select(@experiment.commits.collect {|v| v.sha})
+      page.replace_html "experiment_properties", render_properties(@experiment.experiment_properties)
+      page.replace_html "issue_experiment_version", options_for_select(@experiment.revisions.map {|v| [@experiment.pretty_commit_id(v.sha), v.sha]})
     end
   end
 
   private
 
-  def define_attributes(content)
-    self.experiment_properties = []
-    content.each do |line|
-      if line =~ /^\s*defProperty\('.*'\)/
-        eval(line)
-      end
-    end
-  end
-
-  def defProperty(name, default, desc)
-    self.experiment_properties << [name, default]
-  end
-
-  def define_git_repo
-    @repo = Grit::Repo.new(AppConfig.git_dir + @project.identifier)
-  end
-
   def find_project
     @project = Project.find(params[:project_id])
   rescue ActiveRecord::RecordNotFound
     render_404
+  end
+
+  def find_experiment
+    @experiment = Experiment.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render_404
+  end
+
+  def render_properties(properties)
+    properties.map do |p|
+      "<p>" +  label_tag(p[0]) + text_field_tag("issue[experiment_attributes][#{p[0]}]", p[1]) + "</p>"
+    end.join("\n")
   end
 end
