@@ -8,7 +8,7 @@ module Captcha
     module ClassMethods
       def acts_as_captcha
         unless included_modules.include? InstanceMethods
-          include InstanceMethods 
+          include InstanceMethods
         end
         before_filter :assign_captcha
       end
@@ -16,19 +16,20 @@ module Captcha
 
     module InstanceMethods
       private
-      
+
       def assign_captcha
         unless session[:captcha] && Captcha::Config.exists?(session[:captcha])
           files = Captcha::Config.captchas
+          raise "No captcha images, please run `rake captcha:generate`" if files.empty?
           session[:captcha] = File.basename(files[rand(files.length)], '.jpg')
         end
       end
-      
+
       def reset_captcha
         session[:captcha] = nil
         assign_captcha
       end
     end
-  
+
   end
 end
