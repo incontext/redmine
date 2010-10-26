@@ -1,5 +1,5 @@
 class Experiment < ActiveRecord::Base
-  has_many :issues
+  has_many :issues, :dependent => :destroy
   belongs_to :project
   belongs_to :user
   validates_presence_of :identifier, :experiment_type, :project_id, :user_id
@@ -56,7 +56,7 @@ class Experiment < ActiveRecord::Base
                  AppConfig.git_dir + destination_project.identifier,
                  script_path,
                  script_content,
-                 "Copied from #{source_project.identifier} (updated by #{user.login} at #{Time.now.to_s})")
+                 "Copied from #{source_project.identifier} (updated by #{user.login} at #{Time.now.strftime('%Y-%m-%d %H:%M:%S')})")
 
     destination_tree = destination_repo.tree("HEAD", script_path)
     raise "Failed to copy script across" if destination_tree.contents.empty?
@@ -72,7 +72,7 @@ class Experiment < ActiveRecord::Base
   def define_attributes(content)
     self.experiment_properties = []
     content.each do |line|
-      if line =~ /^\s*defProperty\('.*'\)/
+      if line =~ /^\s*defProperty\(['"].*['"]\)/
         eval(line)
       end
     end

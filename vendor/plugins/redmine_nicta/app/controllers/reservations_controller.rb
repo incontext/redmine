@@ -3,9 +3,10 @@ class ReservationsController < ApplicationController
 
   before_filter :find_project, :authorize
   before_filter :find_reservation, :only => [:update, :edit, :destroy, :deny, :approve]
+  before_filter :find_resource, :only => [:new, :edit, :update, :create]
 
   def new
-    @reservation = Reservation.new(:project_id => @project)
+    @reservation = Reservation.new(:project_id => @project.id)
   end
 
   def edit
@@ -14,7 +15,7 @@ class ReservationsController < ApplicationController
   def update
     if @reservation.update_attributes(params[:reservation])
       flash[:notice] = 'Reservation updated successfully'
-      redirect_to reservations_url(:project_id => @project)
+      redirect_to project_reservations_url(@project)
     else
       render :template => 'reservations/edit'
     end
@@ -23,7 +24,7 @@ class ReservationsController < ApplicationController
   def destroy
     if @reservation.deny!
       flash[:notice] = 'Reservation denied successfully'
-      redirect_to reservations_url(:project_id => @project)
+      redirect_to project_reservations_url(@project)
     else
       flash[:error] = 'Failed to deny reservation'
       redirect_to :back
@@ -33,7 +34,7 @@ class ReservationsController < ApplicationController
   def approve
     if @reservation.approve!
       flash[:notice] = 'Reservation approved successfully'
-      redirect_to reservations_url(:project_id => @project)
+      redirect_to project_reservations_url(@project)
     else
       flash[:error] = 'Failed to approve reservation'
       redirect_to :back
@@ -53,7 +54,7 @@ class ReservationsController < ApplicationController
     @reservation.user = find_current_user
     if @reservation.save
       flash[:notice] = 'Reservation created successfully'
-      redirect_to reservations_url(:project_id => @project)
+      redirect_to project_reservations_url(@project)
     else
       render :template => 'reservations/new'
     end
@@ -63,6 +64,11 @@ class ReservationsController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find(params[:id])
+  end
+
+  def find_resource
+    @resource = (@reservation && YAML::load(@reservation.resource)) ||
+      (params[:reservation] && params[:reservation][:resource]) || []
   end
 
   def find_project
