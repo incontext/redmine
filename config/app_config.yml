@@ -6,6 +6,9 @@ experiment_types:
   - IREEL
 resources:
   - identifier: r1
+    gcal: v8i5bns2ndjajh1i1bbn97f520@group.calendar.google.com
+    pvttk: 6d15610c34418191a0b91b12435aabf5
+    colour: "#2F6213"
     nodes:
       - n1
       - n2
@@ -17,6 +20,9 @@ resources:
       - n8
       - n9
   - identifier: r2
+    gcal: ssitncbuo0pj8qt0uiurkqjqc4@group.calendar.google.com
+    colour: "#113F47"
+    pvttk: 2965c0dc31e3da863d19b27f4eb9be88
     nodes:
       - n11
       - n12
@@ -28,6 +34,9 @@ resources:
       - n18
       - n19
   - identifier: r3
+    gcal: 9f4q03c2upsrcpogg9bt3k8q6g@group.calendar.google.com
+    pvttk: c7236e0005ed2306c1b93bc8d7614a86
+    colour: "#182C57"
     nodes:
       - n21
       - n22
@@ -41,7 +50,5 @@ resources:
 gcal:
   account: jhong@incontext.com.au
   password: Loyalty225
-  calendars:
-    - identifier: v8i5bns2ndjajh1i1bbn97f520%40group.calendar.google.com
-      private_address: http://www.google.com/calendar/embed?src=v8i5bns2ndjajh1i1bbn97f520%40group.calendar.google.com&ctz=Australia/Sydney&pvttk=6d15610c34418191a0b91b12435aabf5
-      location: 25 Garden St Eveleigh New South Wales 2015
+  ctz: Australia/Sydney
+  location: 25 Garden St Eveleigh New South Wales 2015
