@@ -42,11 +42,29 @@ class ReservationsController < ApplicationController
   end
 
   def index
-    @reservations = Reservation.all
+    conditions = params[:filter] == 'pending' ? " status = 'pending' " : ""
+
+    @reservation_pages, @reservations = paginate :reservations,
+      :per_page => 10,
+      :conditions => conditions,
+      :order => 'reservations.starts_at desc'
+
     respond_to do |format|
-      format.html
+      format.html { render :layout => false if request.xhr? }
       format.xml { render :xml => Reservation.approved.to_xml }
     end
+  end
+
+  def show
+    @reservation = Reservation.find(params[:id])
+    respond_to do |format|
+      format.xml { render :xml => @reservation.to_xml }
+    end
+  end
+
+  def calendar
+    @resource_cal = AppConfig.resources.find {|v| v.identifier == params[:cal]} || AppConfig.resources.first
+    @calendar_src = URI.encode("http://www.google.com/calendar/embed?src=#{@resource_cal.gcal}&pvttk=#{@resource_cal.pvttk}&color=#{@resource_cal.colour}&ctz=#{AppConfig.gcal.ctz}&showTitle=0&showCalendars=0")
   end
 
   def create
