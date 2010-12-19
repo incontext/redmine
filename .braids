@@ -1,29 +1,22 @@
 --- 
-vendor/plugins/weekly_builder: 
-  squashed: true
-  branch: master
-  url: git://github.com/dmix/weekly_builder.git
-  type: git
-  revision: 9c790bd99dce84da4c86203587890e31c05cd756
-  remote: braid/vendor/plugins/weekly-builder
 vendor/plugins/app_config: 
-  squashed: true
   branch: master
-  url: http://github.com/merbjedi/app_config.git
-  type: git
-  revision: 5fba89d4b34c3cd32922adfeab9464fa3466d9cf
   remote: braid/vendor/plugins/app-config
+  revision: 5fba89d4b34c3cd32922adfeab9464fa3466d9cf
+  squashed: true
+  type: git
+  url: http://github.com/merbjedi/app_config.git
 vendor/plugins/captcha: 
-  squashed: true
   branch: master
-  url: git://github.com/winton/captcha.git
-  type: git
-  revision: 4ab94372f47ba63093c229f746e9b36883fba62f
   remote: braid/vendor/plugins/captcha
-vendor/plugins/redmine_nicta: 
+  revision: 4ab94372f47ba63093c229f746e9b36883fba62f
   squashed: true
-  url: git@github.com:incontext/redmine_nicta.git
-  branch: master
   type: git
-  revision: 94bc25c68bec5d343b1c2c4aec96a575fe6e44f4
+  url: git://github.com/winton/captcha.git
+vendor/plugins/redmine_nicta: 
+  branch: master
   remote: braid/vendor/plugins/redmine-nicta
+  revision: 94bc25c68bec5d343b1c2c4aec96a575fe6e44f4
+  squashed: true
+  type: git
+  url: git@github.com:incontext/redmine_nicta.git
