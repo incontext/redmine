@@ -53,7 +53,7 @@ Redmine::AccessControl.map do |map|
   map.permission :manage_members, {:projects => :settings, :members => [:new, :edit, :destroy, :autocomplete_for_member]}, :require => :member
   map.permission :manage_versions, {:projects => :settings, :versions => [:new, :create, :edit, :update, :close_completed, :destroy]}, :require => :member
   map.permission :add_subprojects, {:projects => [:new, :create]}, :require => :member
-  
+
   map.project_module :issue_tracking do |map|
     # Issue categories
     map.permission :manage_categories, {:projects => :settings, :issue_categories => [:new, :edit, :destroy]}, :require => :member
@@ -66,6 +66,8 @@ Redmine::AccessControl.map do |map|
                                   :queries => :index,
                                   :reports => [:issue_report, :issue_report_details]}
     map.permission :add_issues, {:issues => [:new, :create, :update_form]}
+    map.permission :add_private_issues, {:issues => [:new, :update_form]}, :require => :loggedin
+    map.permission :view_private_issues, {}, :require => :member
     map.permission :edit_issues, {:issues => [:edit, :update, :bulk_edit, :bulk_update, :update_form], :journals => [:new]}
     map.permission :manage_issue_relations, {:issue_relations => [:new, :destroy]}
     map.permission :manage_subtasks, {}
