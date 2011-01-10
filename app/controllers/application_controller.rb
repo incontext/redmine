@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
     elsif params[:format] == 'atom' && params[:key] && accept_key_auth_actions.include?(params[:action])
       # RSS key authentication does not start a session
       User.find_by_rss_key(params[:key])
-    elsif Setting.rest_api_enabled? && ['xml', 'json'].include?(params[:format])
+    elsif Setting.rest_api_enabled?
       if params[:key].present? && accept_key_auth_actions.include?(params[:action])
         # Use API key
         User.find_by_api_key(params[:key])

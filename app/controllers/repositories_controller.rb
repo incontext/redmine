@@ -26,14 +26,14 @@ class RepositoriesController < ApplicationController
   menu_item :repository
   menu_item :settings, :only => :edit
   default_search_scope :changesets
-  
+
   before_filter :find_repository, :except => :edit
   before_filter :find_project, :only => :edit
   before_filter :authorize
-  accept_key_auth :revisions
-  
+  accept_key_auth :revisions, :entry
+
   rescue_from Redmine::Scm::Adapters::CommandFailed, :with => :show_error_command_failed
-  
+
   def edit
     @repository = @project.repository
     if !@repository
