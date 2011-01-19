@@ -47,8 +47,15 @@ resources:
       - n27
       - n28
       - n29
+
+reservation_options:
+  - No reservation yet
+  - ASAP
+  - According to ideal topology
+  - Future reservation
+
 gcal:
   account: jhong@incontext.com.au
-  password: Loyalty225
+  password: oxford25
   ctz: Australia/Sydney
   location: 25 Garden St Eveleigh New South Wales 2015
